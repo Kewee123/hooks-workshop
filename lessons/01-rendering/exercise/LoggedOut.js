@@ -15,11 +15,15 @@ import About from "app/About"
 export default function LoggedOut() {
   return (
     <div className="LoggedOut">
-      <About />
+      <About/>
       <Tabs>
         <TabList>
-          <Tab>Login</Tab>
-          <Tab>Signup</Tab>
+         <Tab>
+           Login
+         </Tab>
+         <Tab>
+           Signup
+         </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
