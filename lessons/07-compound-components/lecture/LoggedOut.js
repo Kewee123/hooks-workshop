@@ -9,20 +9,33 @@ import LoginForm from "app/LoginForm"
 import SignupForm from "app/SignupForm"
 import About from "app/About"
 
+const TabsContext = createContext();
+
 function Tabs({ children }) {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  return <div data-reach-tabs>{children}</div>
+  return (
+    <TabsContext.Provider value={{activeIndex, setActiveIndex}}>
+      <div data-reach-tabs>{children}</div>
+    </TabsContext.Provider>
+  )
 }
 
+const TabListContext = createContext();
+
 function TabList({ children }) {
-  return <div data-reach-tab-list>{children}</div>
+  return <div data-reach-tab-list>{
+    children.map((child, index) => (
+      <TabListContext.Provider value={{index}}>
+        {child}
+      </TabListContext.Provider>
+    ))
+    }</div>
 }
 
 function Tab({ isDisabled, children }) {
-  const index = 0 // TODO
-  const activeIndex = 0 // TODO
-  const setActiveIndex = () => {} // TODO
+  const {index} = useContext(TabListContext) // TODO
+  const { activeIndex, setActiveIndex } = useContext(TabsContext)
   const isActive = index === activeIndex
   return (
     <button
@@ -40,7 +53,7 @@ function Tab({ isDisabled, children }) {
 }
 
 function TabPanels({ children }) {
-  const activeIndex = 0 // TODO
+  const { activeIndex } = useContext(TabsContext)
   return (
     <div data-reach-tab-panels>{children[activeIndex]}</div>
   )
