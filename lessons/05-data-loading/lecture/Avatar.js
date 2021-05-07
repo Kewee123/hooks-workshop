@@ -15,29 +15,32 @@ export default function Avatar({
   className,
   ...rest
 }) {
-  const [user, setUser] = useState(null)
-  const [posts, setPosts] = useState(null)
+  // const [user, setUser] = useState(null)
+  // const [posts, setPosts] = useState(null)
 
-  useEffect(() => {
-    const unsubscribe = subscribeToPosts(uid, posts => {
-      setPosts(posts)
-    })
-    return () => {
-      unsubscribe()
-    }
-  }, [uid])
+  // useEffect(() => {
+  //   const unsubscribe = subscribeToPosts(uid, posts => {
+  //     setPosts(posts)
+  //   })
+  //   return () => {
+  //     unsubscribe()
+  //   }
+  // }, [uid])
 
-  useEffect(() => {
-    let isCurrent = true
-    fetchUser(uid).then(user => {
-      if (isCurrent) {
-        setUser(user)
-      }
-    })
-    return () => {
-      isCurrent = false
-    }
-  }, [uid])
+  // useEffect(() => {
+  //   let isCurrent = true
+
+  //   //Async work
+  //   fetchUser(uid).then(user => {
+  //     if (isCurrent) {
+  //       setUser(user)
+  //     }
+  //   })
+    
+  //   return () => {
+  //     isCurrent = false
+  //   }
+  // }, [uid])
 
   if (!user) {
     return (
